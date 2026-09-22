@@ -25,7 +25,7 @@ export default function Header() {
             <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-black sm:h-24 sm:w-24">
               <Image
   src="/logo.png"
-  alt="Rukun Dhijaj"
+  alt="CHICKEN CORNER"
   fill
   priority
   sizes="120px"
@@ -44,9 +44,9 @@ export default function Header() {
             </h1>
 
             <h2 className="mt-2 text-3xl font-extrabold uppercase tracking-[0.18em] text-white sm:text-5xl sm:tracking-[0.28em]">
-              RUKUN
+              CHICKEN
               <br className="sm:hidden" />
-              <span className="sm:ml-3">DHIJAJ</span>
+              <span className="sm:ml-3">CORNER</span>
             </h2>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-400">

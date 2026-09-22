@@ -49,21 +49,17 @@ export default function CheckoutModal({
   } | null>(null);
 
   /*
-   * RUKUN DHIJAJ RESTAURANT LOCATION
+   * RUKUN DHIJAJ DELIVERY AREA
    *
-   * Restaurant:
-   * 6989 Prince Mutaib bin Abdulaziz Rd
-   * Al-Safa, Jeddah 23455
-   *
-   * IMPORTANT:
-   * These are the restaurant center coordinates used
-   * for the 10 km delivery-radius calculation.
+   * Delivery is allowed only inside this boundary:
+   * P1 → P2 → P3 → P4 → P1
    */
-  const RESTAURANT_LAT = 21.639898;
-  const RESTAURANT_LNG = 39.181721;
-
-  // Maximum delivery distance
-  const MAX_DELIVERY_DISTANCE_KM = 5;
+  const DELIVERY_AREA = [
+    { latitude: 21.582841, longitude: 39.209075 },
+    { latitude: 21.586236, longitude: 39.227032 },
+    { latitude: 21.606445, longitude: 39.218745 },
+    { latitude: 21.602641, longitude: 39.202826 },
+  ];
 
   useEffect(() => {
     const saved = localStorage.getItem("customer_details");
@@ -98,27 +94,35 @@ export default function CheckoutModal({
     }
   }, []);
 
-  // Calculate distance between two GPS coordinates
-  const calculateDistanceKm = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
+  // Check whether customer location is inside delivery area
+  const isInsideDeliveryArea = (
+    latitude: number,
+    longitude: number
   ) => {
-    const R = 6371;
+    let inside = false;
 
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    for (
+      let i = 0, j = DELIVERY_AREA.length - 1;
+      i < DELIVERY_AREA.length;
+      j = i++
+    ) {
+      const xi = DELIVERY_AREA[i].longitude;
+      const yi = DELIVERY_AREA[i].latitude;
 
-    const a =
-      Math.sin(dLat / 2) ** 2 +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) ** 2;
+      const xj = DELIVERY_AREA[j].longitude;
+      const yj = DELIVERY_AREA[j].latitude;
 
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const intersect =
+        yi > latitude !== yj > latitude &&
+        longitude <
+          ((xj - xi) * (latitude - yi)) / (yj - yi) + xi;
 
-    return R * c;
+      if (intersect) {
+        inside = !inside;
+      }
+    }
+
+    return inside;
   };
 
   const getCurrentLocation = () => {
@@ -249,24 +253,17 @@ export default function CheckoutModal({
       return;
     }
 
-    // Calculate distance from restaurant
-    const distance = calculateDistanceKm(
-      RESTAURANT_LAT,
-      RESTAURANT_LNG,
+    // Check delivery area
+    const insideDeliveryArea = isInsideDeliveryArea(
       customerCoords.latitude,
       customerCoords.longitude
     );
 
-    // Block customers outside 10 km
-    if (distance > MAX_DELIVERY_DISTANCE_KM) {
+    if (!insideDeliveryArea) {
       alert(
         isAr
-          ? `عذراً، التوصيل متاح ضمن نطاق ${MAX_DELIVERY_DISTANCE_KM} كم فقط من المطعم.\n\nالمسافة الحالية: ${distance.toFixed(
-              1
-            )} كم`
-          : `Sorry, delivery is available only within ${MAX_DELIVERY_DISTANCE_KM} km of the restaurant.\n\nYour distance: ${distance.toFixed(
-              1
-            )} km`
+          ? "عذراً، موقعك خارج منطقة التوصيل."
+          : "Sorry, your location is outside our delivery area."
       );
 
       return;

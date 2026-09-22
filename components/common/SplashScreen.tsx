@@ -91,7 +91,7 @@ export default function SplashScreen({ show, onFinish }: SplashScreenProps) {
               >
                 <Image
                   src="/calligraphy.png"
-                  alt="Rukun Dhijaj"
+                  alt="Chicken Corner"
                   width={210}
                   height={210}
                   priority
@@ -116,9 +116,9 @@ export default function SplashScreen({ show, onFinish }: SplashScreenProps) {
                 transition={{ delay: 0.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 className={`text-center text-5xl font-black tracking-[0.35em] mr-[-0.35em] bg-gradient-to-b ${primaryGold} bg-clip-text text-transparent drop-shadow-[0_4px_15px_rgba(0,0,0,0.6)] will-change-transform`}
               >
-                RUKUN
+                CHICKEN 
                 <br />
-                <span className="text-4xl tracking-[0.4em] mr-[-0.4em] font-extrabold">DHIJAJ</span>
+                <span className="text-4xl tracking-[0.4em] mr-[-0.4em] font-extrabold">CORNER</span>
               </motion.h1>
             </div>
 

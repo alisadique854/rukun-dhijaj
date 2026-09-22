@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap gap-4 w-full lg:w-auto justify-center lg:justify-start">
             <a
-              href="https://wa.me/919656836427"
+              href="https://wa.me/966556127369"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-[#ffb800] text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-[#ffb800] hover:shadow-[0_0_20px_rgba(255,184,0,0.4)] hover:scale-105 active:scale-95 font-cairo w-full sm:w-auto text-center"
@@ -41,7 +41,7 @@ export default function Footer() {
               <span>{isAr ? "طلب عبر الواتساب" : "WhatsApp Order"}</span>
             </a>
             <a
-              href="tel:+919656836427"
+              href="tel:+966556127369"
               className="flex items-center justify-center gap-2 border border-[#2d2208] bg-[#111111] text-[#ffb800] font-bold px-8 py-4 rounded-xl transition-all duration-300 hover:border-[#ffb800] hover:bg-[#ffb800] hover:text-black hover:shadow-[0_0_20px_rgba(255,184,0,0.2)] hover:scale-105 active:scale-95 font-cairo w-full sm:w-auto text-center"
             >
               <span>{isAr ? "اتصل الآن" : "Call Now"}</span>
@@ -58,7 +58,7 @@ export default function Footer() {
           {/* Column 1: Restaurant */}
           <div className="lg:col-span-1">
             <h2 className="text-3xl font-black text-[#ffb800] font-cairo tracking-wide">
-              {isAr ? "ركن الدجاج" : "RUKUN DHIJAJ"}
+              {isAr ? "ركن الدجاج" : "CHICKEN CORNER"}
             </h2>
             <p className="mt-4 leading-7 text-neutral-400 font-cairo text-sm">
               {isAr 
@@ -83,7 +83,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <FaWhatsapp size={18} className="shrink-0 text-[#ffb800]" />
                 <a
-                  href="https://wa.me/919656836427"
+                  href="https://wa.me/966556127369"
                   target="_blank"
                   rel="noopener noreferrer"
                   dir="ltr"
@@ -133,16 +133,16 @@ export default function Footer() {
             </h3>
             <div className="space-y-4 text-sm">
               <a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 border border-[#2d2208] bg-[#161616] px-4 py-3 rounded-xl text-neutral-300 transition-all duration-300 hover:border-[#ffb800] hover:text-[#ffb800] hover:shadow-[0_0_15px_rgba(255,184,0,0.15)] hover:scale-105"
-              >
-                <Map size={18} className="shrink-0 text-[#ffb800]" />
-                <span className="font-cairo font-medium">
-                  {isAr ? "الاتجاهات" : "Get Directions"}
-                </span>
-              </a>
+  href="https://www.google.com/maps/dir/?api=1&destination=3511%20Prince%20Mutaib%20bin%20Abdulaziz%20Rd%2C%20Al%20Safa%206989%2C%20Jeddah%2023455%2C%20Saudi%20Arabia"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-3 border border-[#2d2208] bg-[#161616] px-4 py-3 rounded-xl text-neutral-300 transition-all duration-300 hover:border-[#ffb800] hover:text-[#ffb800] hover:shadow-[0_0_15px_rgba(255,184,0,0.15)] hover:scale-105"
+>
+  <Map size={18} className="shrink-0 text-[#ffb800]" />
+  <span className="font-cairo font-medium">
+    {isAr ? "الاتجاهات" : "Get Directions"}
+  </span>
+</a>
             </div>
           </div>
 
@@ -156,7 +156,7 @@ export default function Footer() {
                 href="https://instagram.com/rukundhijaj"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Follow Rukun Dhijaj on Instagram"
+                aria-label="Follow Chicken Corner on Instagram"
                 className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2d2208] bg-[#181818] text-neutral-400 transition-all duration-300 hover:border-[#ffb800] hover:bg-[#ffb800] hover:text-black hover:shadow-[0_0_15px_rgba(255,184,0,0.3)] hover:scale-105 active:scale-95"
               >
                 <FaInstagram size={20} />
@@ -166,7 +166,7 @@ export default function Footer() {
                 href="https://snapchat.com/add/rukundhijaj"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Follow Rukun Dhijaj on Snapchat"
+                aria-label="Follow Chicken Corner on Snapchat"
                 className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#2d2208] bg-[#181818] text-neutral-400 transition-all duration-300 hover:border-[#ffb800] hover:bg-[#ffb800] hover:text-black hover:shadow-[0_0_15px_rgba(255,184,0,0.3)] hover:scale-105 active:scale-95"
               >
                 <FaSnapchatGhost size={20} />
@@ -182,7 +182,7 @@ export default function Footer() {
             <p className="text-sm text-neutral-500 font-cairo">
               {isAr 
                 ? `© ${formatNumber(String(new Date().getFullYear()))} ركن الدجاج. جميع الحقوق محفوظة.`
-                : `© ${new Date().getFullYear()} RUKUN DHIJAJ. All Rights Reserved.`}
+                : `© ${new Date().getFullYear()} CHICKEN CORNER. All Rights Reserved.`}
             </p>
             <p className="text-sm text-neutral-500 font-cairo">
               {isAr ? "تم التصميم والتطوير بواسطة " : "Designed & Developed by "}
