@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://rukun-dhijaj.vercel.app/sitemap.xml",
-    host: "https://rukun-dhijaj.vercel.app",
+    sitemap: "https://rukundhijaj.com/sitemap.xml",
+    host: "https://rukundhijaj.com",
   };
 }
