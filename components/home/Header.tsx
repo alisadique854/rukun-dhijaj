@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import DeliveryAnimation from "./DeliveryAnimation";
 import { Globe, Leaf, Flame, Bike } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -10,7 +9,7 @@ export default function Header() {
   const isArabic = language === "ar";
 
   return (
-    <header className="mb-8 w-full">
+    <header className="mb-8 hidden w-full sm:block">
       <div className="relative overflow-hidden rounded-3xl border border-yellow-500/10 bg-gradient-to-r from-[#111111] via-[#18181B] to-[#111111] px-4 py-5 shadow-2xl sm:px-6">
         {/* Background Glow */}
         <div className="pointer-events-none absolute inset-0">
@@ -24,13 +23,13 @@ export default function Header() {
 
             <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-black sm:h-24 sm:w-24">
               <Image
-  src="/logo.png"
-  alt="CHICKEN CORNER"
-  fill
-  priority
-  sizes="120px"
-  className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
-/>
+                src="/logo.png"
+                alt="CHICKEN CORNER"
+                fill
+                priority
+                sizes="120px"
+                className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+              />
             </div>
           </div>
 
@@ -50,26 +49,26 @@ export default function Header() {
             </h2>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-400">
-  <span className="flex items-center gap-1">
-    <Leaf size={15} className="text-green-500" />
-    {isArabic ? "طازج" : "Fresh"}
-  </span>
+              <span className="flex items-center gap-1">
+                <Leaf size={15} className="text-green-500" />
+                {isArabic ? "طازج" : "Fresh"}
+              </span>
 
-  <span className="hidden text-zinc-600 sm:inline">•</span>
+              <span className="hidden text-zinc-600 sm:inline">•</span>
 
-  <span className="flex items-center gap-1">
-    <Flame size={15} className="text-orange-500" />
-    {isArabic ? "مقرمش" : "Crispy"}
-  </span>
+              <span className="flex items-center gap-1">
+                <Flame size={15} className="text-orange-500" />
+                {isArabic ? "مقرمش" : "Crispy"}
+              </span>
 
-  <span className="hidden text-zinc-600 sm:inline">•</span>
+              <span className="hidden text-zinc-600 sm:inline">•</span>
 
-  <span className="flex items-center gap-1">
-    <Bike size={15} className="text-yellow-500" />
-    {isArabic ? "توصيل سريع" : "Fast Delivery"}
-  </span>
-</div>
-</div> 
+              <span className="flex items-center gap-1">
+                <Bike size={15} className="text-yellow-500" />
+                {isArabic ? "توصيل سريع" : "Fast Delivery"}
+              </span>
+            </div>
+          </div>
 
           {/* Language Switch */}
           <button

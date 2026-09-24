@@ -30,25 +30,22 @@ export default function Home() {
           showSplash ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
-       <div
-  className="
-    mx-auto
-    w-full
-    max-w-full
-    px-4
-    py-5
-    lg:max-w-[1440px]
-    lg:px-8
-    xl:px-10
-    2xl:px-12
-  "
->
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-full
+            px-4
+            py-5
+            lg:max-w-[1440px]
+            lg:px-8
+            xl:px-10
+            2xl:px-12
+          "
+        >
           <Header />
-          
 
-          <div className="mt-4">
-            <HeroBanner />
-          </div>
+          <HeroBanner />
 
           <div className="-mt-6 relative z-20">
             <SearchBar locale={language} />
