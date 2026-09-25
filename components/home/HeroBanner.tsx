@@ -78,28 +78,25 @@ export default function HeroBanner() {
     <section
       className="
         relative
-        mt-4
+        mt-0
         mb-8
         -mx-4
         w-[calc(100%+2rem)]
-        min-h-[900px]
         overflow-hidden
         bg-[#0d0d0d]
+
         sm:mx-0
         sm:w-full
-        sm:min-h-0
       "
     >
       {/* =====================================================
-          MOBILE HERO BACKGROUND
-          Image: 1024 x 1536 = 2:3
+          MOBILE HERO IMAGE
+          Original image: 1024 x 1536 = 2:3
           ===================================================== */}
       <div
         className="
-          absolute
-          inset-x-0
-          top-0
-          z-0
+          relative
+          w-full
           aspect-[2/3]
           sm:hidden
         "
@@ -110,7 +107,10 @@ export default function HeroBanner() {
           fill
           priority
           sizes="100vw"
-          className="object-contain object-top"
+          className="
+            object-contain
+            object-top
+          "
         />
 
         {/* Overall dark overlay */}
@@ -119,24 +119,26 @@ export default function HeroBanner() {
         {/* Top gradient */}
         <div
           className="
+            pointer-events-none
             absolute
             inset-x-0
             top-0
-            h-24
+            h-28
             bg-gradient-to-b
-            from-[#0d0d0d]
-            via-[#0d0d0d]/60
+            from-[#0d0d0d]/95
+            via-[#0d0d0d]/45
             to-transparent
           "
         />
 
-        {/* Bottom fade */}
+        {/* Bottom gradient */}
         <div
           className="
+            pointer-events-none
             absolute
             inset-x-0
             bottom-0
-            h-[50%]
+            h-[45%]
             bg-gradient-to-t
             from-[#0d0d0d]
             via-[#0d0d0d]/55
@@ -147,7 +149,7 @@ export default function HeroBanner() {
 
       {/* =====================================================
           MOBILE HEADER
-          OVERLAY - ZERO EXTRA SPACE
+          OVERLAY — ZERO EXTRA SPACE
           ===================================================== */}
       <div
         className="
@@ -156,16 +158,27 @@ export default function HeroBanner() {
           top-0
           z-30
           flex
-          items-center
+          items-start
           justify-between
           px-4
           pt-4
           sm:hidden
         "
       >
-        {/* Mobile Text Logo */}
-        <div className="flex flex-col justify-center leading-none">
-          {/* Arabic */}
+        {/* =================================================
+            MOBILE BRAND
+            Fixed LEFT
+            ================================================= */}
+        <div
+          className="
+            flex
+            flex-col
+            items-start
+            justify-center
+            leading-none
+          "
+        >
+          {/* Arabic Brand */}
           <div
             dir="rtl"
             className="
@@ -179,12 +192,12 @@ export default function HeroBanner() {
             ركن الدجاج
           </div>
 
-          {/* English */}
+          {/* English Brand */}
           <div
             className="
               mt-1
               whitespace-nowrap
-              text-[14px]
+              text-[12px]
               font-bold
               leading-none
               tracking-[0.08em]
@@ -195,9 +208,14 @@ export default function HeroBanner() {
           </div>
         </div>
 
-        {/* Language Switch */}
+        {/* =================================================
+            LANGUAGE SWITCH
+            Fixed RIGHT
+            ================================================= */}
         <button
+          type="button"
           onClick={toggleLanguage}
+          aria-label="Change language"
           className="
             flex
             h-9
@@ -212,11 +230,13 @@ export default function HeroBanner() {
             text-xs
             font-semibold
             text-white
+            shadow-lg
             backdrop-blur-md
             transition
             duration-300
             hover:border-yellow-400
             hover:bg-[#242428]
+            active:scale-95
           "
         >
           <Globe size={15} />
@@ -255,11 +275,17 @@ export default function HeroBanner() {
           fill
           priority
           sizes="(min-width: 640px) 100vw"
-          className="object-cover object-[78%] sm:object-right"
+          className="
+            object-cover
+            object-[78%]
+            sm:object-right
+          "
         />
 
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55" />
 
+        {/* Left gradient */}
         <div
           className="
             absolute
@@ -272,6 +298,7 @@ export default function HeroBanner() {
           "
         />
 
+        {/* Gold glow */}
         <div
           className="
             absolute
@@ -280,6 +307,7 @@ export default function HeroBanner() {
           "
         />
 
+        {/* Bottom fade */}
         <div
           className="
             absolute
@@ -307,7 +335,7 @@ export default function HeroBanner() {
           justify-end
           px-5
           pb-2
-          pt-8
+          pt-2
 
           sm:min-h-[560px]
           sm:justify-center
@@ -323,7 +351,12 @@ export default function HeroBanner() {
         {/* =================================================
             18 YEARS BADGE
             ================================================= */}
-        <div className="mb-5 sm:mb-6">
+        <div
+          className="
+            mb-5
+            sm:mb-6
+          "
+        >
           <div
             className="
               inline-flex
@@ -338,7 +371,14 @@ export default function HeroBanner() {
               backdrop-blur-md
             "
           >
-            <Star className="h-4 w-4 fill-[#ffb800] text-[#ffb800]" />
+            <Star
+              className="
+                h-4
+                w-4
+                fill-[#ffb800]
+                text-[#ffb800]
+              "
+            />
 
             <span
               className="
@@ -358,16 +398,17 @@ export default function HeroBanner() {
         </div>
 
         {/* =================================================
-            HEADING
-            Fixed physical position
+            MAIN HEADING
+            English = LEFT
+            Arabic = RIGHT
             ================================================= */}
         <h1
-          dir="ltr"
-          className="
-            text-left
+          dir={isRTL ? "rtl" : "ltr"}
+          className={`
             leading-[1.08]
             tracking-tight
-          "
+            ${isRTL ? "text-right" : "text-left"}
+          `}
         >
           <span
             className="
@@ -405,7 +446,8 @@ export default function HeroBanner() {
             SUBTITLE
             ================================================= */}
         <p
-          className="
+          dir={isRTL ? "rtl" : "ltr"}
+          className={`
             mt-5
             flex
             flex-wrap
@@ -417,10 +459,17 @@ export default function HeroBanner() {
             sm:mt-6
             sm:text-base
             md:text-lg
-          "
+            ${isRTL ? "justify-end" : "justify-start"}
+          `}
         >
           {t.hero.subtitle.map((item, index) => (
-            <span key={item} className="flex items-center">
+            <span
+              key={item}
+              className="
+                flex
+                items-center
+              "
+            >
               {index > 0 && (
                 <span className="mx-2 text-[#ffb800]">
                   •
@@ -436,7 +485,8 @@ export default function HeroBanner() {
             DESCRIPTION
             ================================================= */}
         <p
-          className="
+          dir={isRTL ? "rtl" : "ltr"}
+          className={`
             mt-5
             max-w-2xl
             text-sm
@@ -444,7 +494,8 @@ export default function HeroBanner() {
             text-neutral-300
             sm:text-base
             md:text-lg
-          "
+            ${isRTL ? "text-right" : "text-left"}
+          `}
         >
           {t.hero.description}
         </p>
@@ -453,14 +504,16 @@ export default function HeroBanner() {
             FEATURE CHIPS
             ================================================= */}
         <div
-          className="
+          dir={isRTL ? "rtl" : "ltr"}
+          className={`
             mt-6
             flex
             flex-wrap
             gap-2.5
             sm:mt-7
             sm:gap-3
-          "
+            ${isRTL ? "justify-end" : "justify-start"}
+          `}
         >
           {featureItems.map((item, index) => {
             const Icon = item.icon;
@@ -484,7 +537,14 @@ export default function HeroBanner() {
               >
                 <Icon className="h-4 w-4 text-[#ffb800]" />
 
-                <span className="text-xs font-medium text-white sm:text-sm">
+                <span
+                  className="
+                    text-xs
+                    font-medium
+                    text-white
+                    sm:text-sm
+                  "
+                >
                   {item.text}
                 </span>
               </div>
@@ -507,6 +567,7 @@ export default function HeroBanner() {
         >
           {/* WhatsApp */}
           <button
+            type="button"
             onClick={handleWhatsAppOrder}
             className="
               flex
@@ -524,6 +585,7 @@ export default function HeroBanner() {
               duration-300
               hover:scale-[1.03]
               hover:bg-[#e6a500]
+              active:scale-[0.98]
             "
           >
             <MessageCircle className="h-5 w-5" />
@@ -575,32 +637,77 @@ export default function HeroBanner() {
             sm:gap-6
           "
         >
+          {/* 18+ */}
           <div>
-            <h3 className="text-2xl font-extrabold text-[#ffb800] sm:text-3xl">
+            <h3
+              className="
+                text-2xl
+                font-extrabold
+                text-[#ffb800]
+                sm:text-3xl
+              "
+            >
               18+
             </h3>
 
-            <p className="mt-1 text-xs text-neutral-300 sm:text-sm">
+            <p
+              className="
+                mt-1
+                text-xs
+                text-neutral-300
+                sm:text-sm
+              "
+            >
               {isRTL ? "سنة" : "Years"}
             </p>
           </div>
 
+          {/* Customers */}
           <div>
-            <h3 className="text-2xl font-extrabold text-[#ffb800] sm:text-3xl">
+            <h3
+              className="
+                text-2xl
+                font-extrabold
+                text-[#ffb800]
+                sm:text-3xl
+              "
+            >
               5K+
             </h3>
 
-            <p className="mt-1 text-xs text-neutral-300 sm:text-sm">
+            <p
+              className="
+                mt-1
+                text-xs
+                text-neutral-300
+                sm:text-sm
+              "
+            >
               {isRTL ? "عملاء" : "Customers"}
             </p>
           </div>
 
+          {/* Fresh */}
           <div>
-            <h3 className="text-2xl font-extrabold text-[#ffb800] sm:text-3xl">
+            <h3
+              className="
+                text-2xl
+                font-extrabold
+                text-[#ffb800]
+                sm:text-3xl
+              "
+            >
               100%
             </h3>
 
-            <p className="mt-1 text-xs text-neutral-300 sm:text-sm">
+            <p
+              className="
+                mt-1
+                text-xs
+                text-neutral-300
+                sm:text-sm
+              "
+            >
               {isRTL ? "طازج" : "Fresh"}
             </p>
           </div>
