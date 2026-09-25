@@ -99,10 +99,10 @@ export default function DeliveryMap({
         <Polygon
           positions={DELIVERY_POINTS}
           pathOptions={{
-            color: "#D4AF37",
+            color: "#d925ca",
             weight: 3,
-            fillColor: "#D4AF37",
-            fillOpacity: 0.16,
+            fillColor: "#d925ca",
+            fillOpacity: 0.33,
           }}
         />
 
