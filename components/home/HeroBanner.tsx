@@ -82,12 +82,7 @@ export default function HeroBanner() {
         mb-8
         w-full
         overflow-hidden
-        rounded-[24px]
-        border
-        border-[#2d2208]
         bg-[#0d0d0d]
-        shadow-xl
-        sm:rounded-[28px]
       "
     >
       {/* =====================================================
@@ -109,16 +104,18 @@ export default function HeroBanner() {
           sm:hidden
         "
       >
-        {/* Mobile Logo */}
-        <div className="relative h-14 w-[170px]">
-          <Image
-            src="/logo.png"
-            alt="CHICKEN CORNER"
-            fill
-            priority
-            sizes="170px"
-            className="object-contain object-left"
-          />
+        {/* Mobile Text Logo */}
+        <div className="flex flex-col justify-center leading-none">
+          <div
+            dir="rtl"
+            className="text-[24px] font-black tracking-tight text-yellow-400"
+          >
+            ركن الدجاج
+          </div>
+
+          <div className="mt-1 text-[12px] font-bold tracking-[0.18em] text-white">
+            CHICKEN CORNER
+          </div>
         </div>
 
         {/* Language Switch */}
@@ -270,6 +267,7 @@ export default function HeroBanner() {
           lg:py-16
 
           xl:px-20
+          max-sm:[direction:ltr]
         "
       >
         {/* =================================================
