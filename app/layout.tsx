@@ -23,18 +23,18 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rukun-dhijaj.vercel.app"),
+  metadataBase: new URL("https://rukundhijaj.com"),
 
   title: {
-    default: "Rukun Dhijaj",
-    template: "%s | Rukun Dhijaj",
+    default: "CHICKEN CORNER",
+    template: "%s | Chicken Corner  ",
   },
 
   description:
-    "Rukun Dhijaj - Premium restaurant serving broast, burgers, pizza, shawarma, grills and fast delivery.",
+    "Chicken Corner   - Premium restaurant serving broast, burgers, pizza, shawarma, grills and fast delivery.",
 
   keywords: [
-    "Rukun Dhijaj",
+    "Chicken Corner",
     "ركن الدجاج",
     "Broast",
     "Burger",
@@ -49,16 +49,16 @@ export const metadata: Metadata = {
     "Fast Food",
   ],
 
-  applicationName: "Rukun Dhijaj",
+  applicationName: "Chicken Corner",
 
   authors: [
     {
-      name: "Rukun Dhijaj",
+      name: "Chicken Corner",
     },
   ],
 
-  creator: "Rukun Dhijaj",
-  publisher: "Rukun Dhijaj",
+  creator: "Chicken Corner",
+  publisher: "Chicken Corner",
 
   verification: {
     google: "-s3p2iHv6ZRas9MfUScsyi5U1YLXYnSOXvonnqDsx1E",
@@ -78,15 +78,15 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://rukun-dhijaj.vercel.app",
+    canonical: "https://rukundhijaj.com",
   },
 
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rukun-dhijaj.vercel.app",
-    siteName: "Rukun Dhijaj",
-    title: "Rukun Dhijaj",
+    url: "https://rukundhijaj.com",
+    siteName: "Chicken Corner",
+    title: "Chicken Corner",
     description:
       "Premium restaurant serving broast, burgers, pizza, shawarma and grills.",
     images: [
@@ -94,14 +94,14 @@ export const metadata: Metadata = {
         url: "/logo.png",
         width: 512,
         height: 512,
-        alt: "Rukun Dhijaj",
+        alt: "Chicken Corner",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Rukun Dhijaj",
+    title: "Chicken Corner",
     description:
       "Premium restaurant serving broast, burgers, pizza, shawarma and grills.",
     images: ["/logo.png"],

@@ -80,9 +80,14 @@ export default function HeroBanner() {
         relative
         mt-4
         mb-8
-        w-full
+        -mx-4
+        w-[calc(100%+2rem)]
+        min-h-[900px]
         overflow-hidden
         bg-[#0d0d0d]
+        sm:mx-0
+        sm:w-full
+        sm:min-h-0
       "
     >
       {/* =====================================================
@@ -108,12 +113,25 @@ export default function HeroBanner() {
         <div className="flex flex-col justify-center leading-none">
           <div
             dir="rtl"
-            className="text-[24px] font-black tracking-tight text-yellow-400"
+            className="
+              text-[24px]
+              font-black
+              tracking-tight
+              text-yellow-400
+            "
           >
             ركن الدجاج
           </div>
 
-          <div className="mt-1 text-[12px] font-bold tracking-[0.18em] text-white">
+          <div
+            className="
+              mt-1
+              text-[12px]
+              font-bold
+              tracking-[0.18em]
+              text-white
+            "
+          >
             CHICKEN CORNER
           </div>
         </div>
@@ -168,8 +186,9 @@ export default function HeroBanner() {
 
       {/* =====================================================
           MOBILE HERO IMAGE
+          Full hero background
           ===================================================== */}
-      <div className="relative block h-[340px] w-full sm:hidden">
+      <div className="absolute inset-0 z-0 sm:hidden">
         <Image
           src="/images/hero-mobile.webp"
           alt="Chicken Corner Restaurant"
@@ -179,16 +198,19 @@ export default function HeroBanner() {
           className="object-cover object-center"
         />
 
-        {/* Image bottom fade */}
+        {/* Overall dark overlay */}
+        <div className="absolute inset-0 bg-black/35" />
+
+        {/* Bottom fade for readable content */}
         <div
           className="
             absolute
             inset-x-0
             bottom-0
-            h-36
+            h-[70%]
             bg-gradient-to-t
             from-[#0d0d0d]
-            via-[#0d0d0d]/40
+            via-[#0d0d0d]/60
             to-transparent
           "
         />
@@ -252,26 +274,23 @@ export default function HeroBanner() {
           relative
           z-20
           flex
-          min-h-0
+          min-h-[824px]
           flex-col
           justify-center
           px-5
           pb-8
           pt-2
-
           sm:min-h-[560px]
           sm:px-8
           sm:py-16
-
           lg:px-16
           lg:py-16
-
           xl:px-20
-          max-sm:[direction:ltr]
         "
       >
         {/* =================================================
             18 YEARS BADGE
+            Keeps existing RTL/LTR behavior
             ================================================= */}
         <div className="mb-5 sm:mb-6">
           <div
@@ -309,8 +328,16 @@ export default function HeroBanner() {
 
         {/* =================================================
             HEADING
+            Fixed LEFT position on mobile
             ================================================= */}
-        <h1 className="leading-[1.08] tracking-tight">
+        <h1
+          dir="ltr"
+          className="
+            text-left
+            leading-[1.08]
+            tracking-tight
+          "
+        >
           <span
             className="
               block
@@ -345,6 +372,7 @@ export default function HeroBanner() {
 
         {/* =================================================
             SUBTITLE
+            Existing RTL/LTR behavior preserved
             ================================================= */}
         <p
           className="
