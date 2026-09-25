@@ -22,7 +22,6 @@ export default function HeroBanner() {
 
   const handleWhatsAppOrder = () => {
     const phone = "966556127369";
-
     const message = t.hero.whatsappMessage;
 
     const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
@@ -32,10 +31,8 @@ export default function HeroBanner() {
     window.location.href = waUrl;
   };
 
-  // Restaurant Phone
   const callNumber = "966556127369";
 
-  // Feature Chips
   const featureItems = isRTL
     ? [
         {
@@ -84,20 +81,21 @@ export default function HeroBanner() {
         w-[calc(100%+2rem)]
         overflow-hidden
         bg-[#0d0d0d]
-
         sm:mx-0
         sm:w-full
       "
     >
       {/* =====================================================
           MOBILE HERO IMAGE
-          Original image: 1024 x 1536 = 2:3
+          Original: 1024 x 1536 = 2:3
           ===================================================== */}
+
       <div
         className="
           relative
-          w-full
+          block
           aspect-[2/3]
+          w-full
           sm:hidden
         "
       >
@@ -113,35 +111,35 @@ export default function HeroBanner() {
           "
         />
 
-        {/* Overall dark overlay */}
-        <div className="absolute inset-0 bg-black/20" />
+        {/* Overall overlay */}
+        <div className="absolute inset-0 bg-black/15" />
 
-        {/* Top gradient */}
+        {/* Top dark overlay */}
         <div
           className="
             pointer-events-none
             absolute
             inset-x-0
             top-0
-            h-28
+            h-24
             bg-gradient-to-b
-            from-[#0d0d0d]/95
-            via-[#0d0d0d]/45
+            from-[#0d0d0d]/90
+            via-[#0d0d0d]/35
             to-transparent
           "
         />
 
-        {/* Bottom gradient */}
+        {/* Bottom fade */}
         <div
           className="
             pointer-events-none
             absolute
             inset-x-0
             bottom-0
-            h-[45%]
+            h-[48%]
             bg-gradient-to-t
             from-[#0d0d0d]
-            via-[#0d0d0d]/55
+            via-[#0d0d0d]/45
             to-transparent
           "
         />
@@ -149,8 +147,9 @@ export default function HeroBanner() {
 
       {/* =====================================================
           MOBILE HEADER
-          OVERLAY — ZERO EXTRA SPACE
+          ZERO EXTRA SPACE
           ===================================================== */}
+
       <div
         className="
           absolute
@@ -161,14 +160,11 @@ export default function HeroBanner() {
           items-start
           justify-between
           px-4
-          pt-4
+          pt-3
           sm:hidden
         "
       >
-        {/* =================================================
-            MOBILE BRAND
-            Fixed LEFT
-            ================================================= */}
+        {/* Mobile Brand - LEFT */}
         <div
           className="
             flex
@@ -178,11 +174,11 @@ export default function HeroBanner() {
             leading-none
           "
         >
-          {/* Arabic Brand */}
+          {/* Arabic */}
           <div
             dir="rtl"
             className="
-              text-[18px]
+              text-[17px]
               font-black
               leading-none
               tracking-tight
@@ -192,15 +188,15 @@ export default function HeroBanner() {
             ركن الدجاج
           </div>
 
-          {/* English Brand */}
+          {/* English */}
           <div
             className="
               mt-1
               whitespace-nowrap
-              text-[12px]
+              text-[11px]
               font-bold
               leading-none
-              tracking-[0.08em]
+              tracking-[0.07em]
               text-white
             "
           >
@@ -208,10 +204,7 @@ export default function HeroBanner() {
           </div>
         </div>
 
-        {/* =================================================
-            LANGUAGE SWITCH
-            Fixed RIGHT
-            ================================================= */}
+        {/* Language Toggle - RIGHT */}
         <button
           type="button"
           onClick={toggleLanguage}
@@ -268,6 +261,7 @@ export default function HeroBanner() {
       {/* =====================================================
           DESKTOP BACKGROUND
           ===================================================== */}
+
       <div className="absolute inset-0 hidden sm:block">
         <Image
           src="/images/hero-banner.webp"
@@ -282,10 +276,8 @@ export default function HeroBanner() {
           "
         />
 
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55" />
 
-        {/* Left gradient */}
         <div
           className="
             absolute
@@ -298,7 +290,6 @@ export default function HeroBanner() {
           "
         />
 
-        {/* Gold glow */}
         <div
           className="
             absolute
@@ -307,7 +298,6 @@ export default function HeroBanner() {
           "
         />
 
-        {/* Bottom fade */}
         <div
           className="
             absolute
@@ -324,18 +314,17 @@ export default function HeroBanner() {
       {/* =====================================================
           CONTENT
           ===================================================== */}
+
       <div
         dir={isRTL ? "rtl" : "ltr"}
-        className="
+        className={`
           relative
           z-20
           flex
-          min-h-[900px]
           flex-col
-          justify-end
           px-5
-          pb-2
-          pt-2
+          pb-8
+          pt-0
 
           sm:min-h-[560px]
           sm:justify-center
@@ -346,370 +335,399 @@ export default function HeroBanner() {
           lg:py-16
 
           xl:px-20
-        "
+
+          ${isRTL ? "items-end text-right" : "items-start text-left"}
+        `}
       >
         {/* =================================================
-            18 YEARS BADGE
+            MOBILE SPACING / CONTENT POSITION
             ================================================= */}
+
         <div
           className="
-            mb-5
-            sm:mb-6
+            w-full
+            sm:max-w-none
           "
         >
+          {/* 18 YEARS BADGE */}
+
           <div
             className="
-              inline-flex
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-[#ffb800]/30
-              bg-[#ffb800]/10
-              px-4
-              py-2
-              backdrop-blur-md
+              mb-4
+              mt-[-92px]
+              sm:mb-6
+              sm:mt-0
             "
           >
-            <Star
+            <div
               className="
-                h-4
-                w-4
-                fill-[#ffb800]
-                text-[#ffb800]
-              "
-            />
-
-            <span
-              className="
-                text-[11px]
-                font-bold
-                uppercase
-                tracking-widest
-                text-[#ffb800]
-                sm:text-xs
-              "
-            >
-              {isRTL
-                ? "أكثر من 18 عاماً من الطعم المميز"
-                : "18+ Years of Delicious Taste"}
-            </span>
-          </div>
-        </div>
-
-        {/* =================================================
-            MAIN HEADING
-            English = LEFT
-            Arabic = RIGHT
-            ================================================= */}
-        <h1
-          dir={isRTL ? "rtl" : "ltr"}
-          className={`
-            leading-[1.08]
-            tracking-tight
-            ${isRTL ? "text-right" : "text-left"}
-          `}
-        >
-          <span
-            className="
-              block
-              text-3xl
-              font-extrabold
-              text-white
-              sm:text-4xl
-              md:text-5xl
-              lg:text-6xl
-              xl:text-7xl
-            "
-          >
-            {t.hero.title1}
-          </span>
-
-          <span
-            className="
-              mt-1
-              block
-              text-3xl
-              font-extrabold
-              text-[#ffb800]
-              sm:text-4xl
-              md:text-5xl
-              lg:text-6xl
-              xl:text-7xl
-            "
-          >
-            {t.hero.title2}
-          </span>
-        </h1>
-
-        {/* =================================================
-            SUBTITLE
-            ================================================= */}
-        <p
-          dir={isRTL ? "rtl" : "ltr"}
-          className={`
-            mt-5
-            flex
-            flex-wrap
-            items-center
-            gap-y-2
-            text-sm
-            font-medium
-            text-neutral-200
-            sm:mt-6
-            sm:text-base
-            md:text-lg
-            ${isRTL ? "justify-end" : "justify-start"}
-          `}
-        >
-          {t.hero.subtitle.map((item, index) => (
-            <span
-              key={item}
-              className="
-                flex
+                inline-flex
                 items-center
+                gap-2
+                rounded-full
+                border
+                border-[#ffb800]/30
+                bg-[#ffb800]/10
+                px-4
+                py-2
+                backdrop-blur-md
               "
             >
-              {index > 0 && (
-                <span className="mx-2 text-[#ffb800]">
-                  •
-                </span>
-              )}
-
-              <span>{item}</span>
-            </span>
-          ))}
-        </p>
-
-        {/* =================================================
-            DESCRIPTION
-            ================================================= */}
-        <p
-          dir={isRTL ? "rtl" : "ltr"}
-          className={`
-            mt-5
-            max-w-2xl
-            text-sm
-            leading-relaxed
-            text-neutral-300
-            sm:text-base
-            md:text-lg
-            ${isRTL ? "text-right" : "text-left"}
-          `}
-        >
-          {t.hero.description}
-        </p>
-
-        {/* =================================================
-            FEATURE CHIPS
-            ================================================= */}
-        <div
-          dir={isRTL ? "rtl" : "ltr"}
-          className={`
-            mt-6
-            flex
-            flex-wrap
-            gap-2.5
-            sm:mt-7
-            sm:gap-3
-            ${isRTL ? "justify-end" : "justify-start"}
-          `}
-        >
-          {featureItems.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <div
-                key={index}
+              <Star
                 className="
-                  flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  border
-                  border-white/10
-                  bg-white/5
-                  px-3.5
-                  py-2
-                  backdrop-blur-md
-                  sm:px-4
+                  h-4
+                  w-4
+                  fill-[#ffb800]
+                  text-[#ffb800]
+                "
+              />
+
+              <span
+                className="
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+                  text-[#ffb800]
+                  sm:text-xs
+                  sm:tracking-widest
                 "
               >
-                <Icon className="h-4 w-4 text-[#ffb800]" />
+                {isRTL
+                  ? "أكثر من 18 عاماً من الطعم المميز"
+                  : "18+ Years of Delicious Taste"}
+              </span>
+            </div>
+          </div>
 
-                <span
+          {/* =================================================
+              MAIN HEADING
+              English = LEFT
+              Arabic = RIGHT
+              ================================================= */}
+
+          <h1
+            dir={isRTL ? "rtl" : "ltr"}
+            className={`
+              leading-[1.08]
+              tracking-tight
+              ${isRTL ? "text-right" : "text-left"}
+            `}
+          >
+            <span
+              className="
+                block
+                text-[32px]
+                font-extrabold
+                text-white
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
+                xl:text-7xl
+              "
+            >
+              {t.hero.title1}
+            </span>
+
+            <span
+              className="
+                mt-1
+                block
+                text-[32px]
+                font-extrabold
+                text-[#ffb800]
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
+                xl:text-7xl
+              "
+            >
+              {t.hero.title2}
+            </span>
+          </h1>
+
+          {/* =================================================
+              SUBTITLE
+              ================================================= */}
+
+          <p
+            dir={isRTL ? "rtl" : "ltr"}
+            className={`
+              mt-5
+              flex
+              flex-wrap
+              items-center
+              gap-y-2
+              text-sm
+              font-medium
+              text-neutral-200
+              sm:mt-6
+              sm:text-base
+              md:text-lg
+              ${isRTL ? "justify-end" : "justify-start"}
+            `}
+          >
+            {t.hero.subtitle.map((item, index) => (
+              <span
+                key={item}
+                className="flex items-center"
+              >
+                {index > 0 && (
+                  <span className="mx-2 text-[#ffb800]">
+                    •
+                  </span>
+                )}
+
+                <span>{item}</span>
+              </span>
+            ))}
+          </p>
+
+          {/* =================================================
+              DESCRIPTION
+              ================================================= */}
+
+          <p
+            dir={isRTL ? "rtl" : "ltr"}
+            className={`
+              mt-5
+              max-w-2xl
+              text-sm
+              leading-relaxed
+              text-neutral-300
+              sm:text-base
+              md:text-lg
+              ${isRTL ? "text-right" : "text-left"}
+            `}
+          >
+            {t.hero.description}
+          </p>
+
+          {/* =================================================
+              FEATURE CHIPS
+              ================================================= */}
+
+          <div
+            dir={isRTL ? "rtl" : "ltr"}
+            className={`
+              mt-6
+              flex
+              flex-wrap
+              gap-2.5
+              sm:mt-7
+              sm:gap-3
+              ${isRTL ? "justify-end" : "justify-start"}
+            `}
+          >
+            {featureItems.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={index}
                   className="
-                    text-xs
-                    font-medium
-                    text-white
-                    sm:text-sm
+                    flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-white/10
+                    bg-white/5
+                    px-3.5
+                    py-2
+                    backdrop-blur-md
+                    sm:px-4
                   "
                 >
-                  {item.text}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+                  <Icon
+                    className="
+                      h-4
+                      w-4
+                      text-[#ffb800]
+                    "
+                  />
 
-        {/* =================================================
-            BUTTONS
-            ================================================= */}
-        <div
-          className="
-            mt-7
-            flex
-            flex-col
-            gap-3
-            sm:mt-8
-            sm:flex-row
-          "
-        >
-          {/* WhatsApp */}
-          <button
-            type="button"
-            onClick={handleWhatsAppOrder}
-            className="
-              flex
-              min-h-[54px]
-              items-center
-              justify-center
-              gap-2
-              rounded-xl
-              bg-[#ffb800]
-              px-6
-              py-3
-              font-bold
-              text-black
-              transition-all
-              duration-300
-              hover:scale-[1.03]
-              hover:bg-[#e6a500]
-              active:scale-[0.98]
-            "
-          >
-            <MessageCircle className="h-5 w-5" />
-
-            {t.hero.whatsapp}
-          </button>
-
-          {/* Call */}
-          <Link
-            href={`tel:${callNumber}`}
-            className="
-              flex
-              min-h-[54px]
-              items-center
-              justify-center
-              gap-2
-              rounded-xl
-              border
-              border-[#ffb800]
-              bg-black/30
-              px-6
-              py-3
-              font-bold
-              text-white
-              backdrop-blur-md
-              transition-all
-              duration-300
-              hover:bg-[#ffb800]
-              hover:text-black
-            "
-          >
-            <Phone className="h-5 w-5" />
-
-            {isRTL ? "اتصل الآن" : "Call Now"}
-          </Link>
-        </div>
-
-        {/* =================================================
-            STATS
-            ================================================= */}
-        <div
-          className="
-            mt-8
-            grid
-            max-w-md
-            grid-cols-3
-            gap-3
-            sm:mt-10
-            sm:gap-6
-          "
-        >
-          {/* 18+ */}
-          <div>
-            <h3
-              className="
-                text-2xl
-                font-extrabold
-                text-[#ffb800]
-                sm:text-3xl
-              "
-            >
-              18+
-            </h3>
-
-            <p
-              className="
-                mt-1
-                text-xs
-                text-neutral-300
-                sm:text-sm
-              "
-            >
-              {isRTL ? "سنة" : "Years"}
-            </p>
+                  <span
+                    className="
+                      text-xs
+                      font-medium
+                      text-white
+                      sm:text-sm
+                    "
+                  >
+                    {item.text}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Customers */}
-          <div>
-            <h3
-              className="
-                text-2xl
-                font-extrabold
-                text-[#ffb800]
-                sm:text-3xl
-              "
-            >
-              5K+
-            </h3>
+          {/* =================================================
+              BUTTONS
+              ================================================= */}
 
-            <p
+          <div
+            className="
+              mt-7
+              flex
+              flex-col
+              gap-3
+              sm:mt-8
+              sm:flex-row
+            "
+          >
+            {/* WhatsApp */}
+
+            <button
+              type="button"
+              onClick={handleWhatsAppOrder}
               className="
-                mt-1
-                text-xs
-                text-neutral-300
-                sm:text-sm
+                flex
+                min-h-[54px]
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                bg-[#ffb800]
+                px-6
+                py-3
+                font-bold
+                text-black
+                transition-all
+                duration-300
+                hover:scale-[1.03]
+                hover:bg-[#e6a500]
+                active:scale-[0.98]
               "
             >
-              {isRTL ? "عملاء" : "Customers"}
-            </p>
+              <MessageCircle className="h-5 w-5" />
+
+              {t.hero.whatsapp}
+            </button>
+
+            {/* Call */}
+
+            <Link
+              href={`tel:${callNumber}`}
+              className="
+                flex
+                min-h-[54px]
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                border
+                border-[#ffb800]
+                bg-black/30
+                px-6
+                py-3
+                font-bold
+                text-white
+                backdrop-blur-md
+                transition-all
+                duration-300
+                hover:bg-[#ffb800]
+                hover:text-black
+              "
+            >
+              <Phone className="h-5 w-5" />
+
+              {isRTL ? "اتصل الآن" : "Call Now"}
+            </Link>
           </div>
 
-          {/* Fresh */}
-          <div>
-            <h3
-              className="
-                text-2xl
-                font-extrabold
-                text-[#ffb800]
-                sm:text-3xl
-              "
-            >
-              100%
-            </h3>
+          {/* =================================================
+              STATS
+              ================================================= */}
 
-            <p
-              className="
-                mt-1
-                text-xs
-                text-neutral-300
-                sm:text-sm
-              "
-            >
-              {isRTL ? "طازج" : "Fresh"}
-            </p>
+          <div
+            className="
+              mt-8
+              grid
+              max-w-md
+              grid-cols-3
+              gap-3
+              sm:mt-10
+              sm:gap-6
+            "
+          >
+            {/* 18+ */}
+
+            <div>
+              <h3
+                className="
+                  text-2xl
+                  font-extrabold
+                  text-[#ffb800]
+                  sm:text-3xl
+                "
+              >
+                18+
+              </h3>
+
+              <p
+                className="
+                  mt-1
+                  text-xs
+                  text-neutral-300
+                  sm:text-sm
+                "
+              >
+                {isRTL ? "سنة" : "Years"}
+              </p>
+            </div>
+
+            {/* Customers */}
+
+            <div>
+              <h3
+                className="
+                  text-2xl
+                  font-extrabold
+                  text-[#ffb800]
+                  sm:text-3xl
+                "
+              >
+                5K+
+              </h3>
+
+              <p
+                className="
+                  mt-1
+                  text-xs
+                  text-neutral-300
+                  sm:text-sm
+                "
+              >
+                {isRTL ? "عملاء" : "Customers"}
+              </p>
+            </div>
+
+            {/* Fresh */}
+
+            <div>
+              <h3
+                className="
+                  text-2xl
+                  font-extrabold
+                  text-[#ffb800]
+                  sm:text-3xl
+                "
+              >
+                100%
+              </h3>
+
+              <p
+                className="
+                  mt-1
+                  text-xs
+                  text-neutral-300
+                  sm:text-sm
+                "
+              >
+                {isRTL ? "طازج" : "Fresh"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
