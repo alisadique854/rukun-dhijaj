@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Cairo } from "next/font/google";
 
 import { CartProvider } from "@/context/CartContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import IOSInstallPrompt from "@/components/IOSInstallPrompt";
 
 import "./globals.css";
 
@@ -27,11 +28,11 @@ export const metadata: Metadata = {
 
   title: {
     default: "CHICKEN CORNER",
-    template: "%s | Chicken Corner  ",
+    template: "%s | Chicken Corner",
   },
 
   description:
-    "Chicken Corner   - Premium restaurant serving broast, burgers, pizza, shawarma, grills and fast delivery.",
+    "Chicken Corner - Premium restaurant serving broast, burgers, pizza, shawarma, grills and fast delivery.",
 
   keywords: [
     "Chicken Corner",
@@ -68,6 +69,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     nocache: false,
+
     googleBot: {
       index: true,
       follow: true,
@@ -110,7 +112,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
-    apple: "/logo.png",
+    apple: "/apple-icon.png",
   },
 };
 
@@ -135,7 +137,10 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-[#0F0F10] text-white">
         <LanguageProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            {children}
+            <IOSInstallPrompt />
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>
