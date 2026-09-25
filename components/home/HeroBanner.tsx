@@ -92,7 +92,6 @@ export default function HeroBanner() {
     >
       {/* =====================================================
           MOBILE HERO BACKGROUND
-          Full width + continuous header/hero
           ===================================================== */}
       <div className="absolute inset-0 z-0 sm:hidden">
         <Image
@@ -121,7 +120,7 @@ export default function HeroBanner() {
           "
         />
 
-        {/* Top dark area behind mobile header */}
+        {/* Top dark area */}
         <div
           className="
             absolute
@@ -138,7 +137,6 @@ export default function HeroBanner() {
 
       {/* =====================================================
           MOBILE HEADER
-          Only visible on mobile
           ===================================================== */}
       <div
         className="
@@ -158,7 +156,7 @@ export default function HeroBanner() {
           <div
             dir="rtl"
             className="
-              text-[24px]
+              text-[19px]
               font-black
               leading-none
               tracking-tight
@@ -168,11 +166,12 @@ export default function HeroBanner() {
             ركن الدجاج
           </div>
 
-          {/* English - SAME SIZE */}
+          {/* English */}
           <div
             className="
               mt-1
-              text-[24px]
+              whitespace-nowrap
+              text-[16px]
               font-bold
               leading-none
               tracking-[0.08em]
@@ -188,16 +187,16 @@ export default function HeroBanner() {
           onClick={toggleLanguage}
           className="
             flex
-            h-10
+            h-9
             shrink-0
             items-center
-            gap-2
-            rounded-xl
+            gap-1.5
+            rounded-lg
             border
             border-zinc-700
             bg-[#1A1A1D]/90
-            px-3
-            text-sm
+            px-2.5
+            text-xs
             font-semibold
             text-white
             backdrop-blur-md
@@ -207,7 +206,7 @@ export default function HeroBanner() {
             hover:bg-[#242428]
           "
         >
-          <Globe size={17} />
+          <Globe size={15} />
 
           <span
             className={
@@ -235,7 +234,7 @@ export default function HeroBanner() {
 
       {/* =====================================================
           DESKTOP BACKGROUND
-          Existing desktop image/layout preserved
+          Existing desktop layout preserved
           ===================================================== */}
       <div className="absolute inset-0 hidden sm:block">
         <Image
@@ -295,7 +294,7 @@ export default function HeroBanner() {
           flex-col
           justify-end
           px-5
-          pb-10
+          pb-2
           pt-20
 
           sm:min-h-[560px]
@@ -348,7 +347,7 @@ export default function HeroBanner() {
 
         {/* =================================================
             HEADING
-            Position stays fixed when language changes
+            Fixed physical position when language changes
             ================================================= */}
         <h1
           dir="ltr"
