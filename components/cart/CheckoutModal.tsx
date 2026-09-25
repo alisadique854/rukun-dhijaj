@@ -8,8 +8,12 @@ import {
   Building2,
   FileText,
   LocateFixed,
+  ChevronDown,
+  ChevronUp,
+  ArrowLeft,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface CheckoutModalProps {
@@ -41,6 +45,14 @@ export default function CheckoutModal({
   const [locationSelected, setLocationSelected] = useState(false);
   const [loadingLocation, setLoadingLocation] = useState(false);
   const [showLocationGuide, setShowLocationGuide] = useState(false);
+  const [showDeliveryArea, setShowDeliveryArea] = useState(false);
+  const showDeliveryAreaRef = useRef(false);
+  const closingRef = useRef(false);
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const googleMapRef = useRef<any>(null);
+  const polygonRef = useRef<any>(null);
+  const shopMarkerRef = useRef<any>(null);
+  const customerMarkerRef = useRef<any>(null);
 
   // Customer GPS coordinates
   const [customerCoords, setCustomerCoords] = useState<{
@@ -49,17 +61,29 @@ export default function CheckoutModal({
   } | null>(null);
 
   /*
-   * RUKUN DHIJAJ DELIVERY AREA
-   *
-   * Delivery is allowed only inside this boundary:
-   * P1 → P2 → P3 → P4 → P1
+   * CHICKEN CORNER DELIVERY AREA
+   * 13 boundary points supplied for the Al-Safa delivery zone.
    */
   const DELIVERY_AREA = [
-    { latitude: 21.582841, longitude: 39.209075 },
-    { latitude: 21.586236, longitude: 39.227032 },
-    { latitude: 21.606445, longitude: 39.218745 },
-    { latitude: 21.602641, longitude: 39.202826 },
+    { latitude: 21.588675, longitude: 39.206459 },
+    { latitude: 21.597151, longitude: 39.203554 },
+    { latitude: 21.602250, longitude: 39.201889 },
+    { latitude: 21.605113, longitude: 39.211084 },
+    { latitude: 21.607636, longitude: 39.220684 },
+    { latitude: 21.601422, longitude: 39.223236 },
+    { latitude: 21.596795, longitude: 39.224881 },
+    { latitude: 21.585095, longitude: 39.227304 },
+    { latitude: 21.577072, longitude: 39.228973 },
+    { latitude: 21.575684, longitude: 39.222662 },
+    { latitude: 21.573533, longitude: 39.210234 },
+    { latitude: 21.580349, longitude: 39.208589 },
+    { latitude: 21.585628, longitude: 39.207319 },
   ];
+
+  const SHOP_LOCATION = {
+    latitude: 21.588682,
+    longitude: 39.206681,
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem("customer_details");
@@ -124,6 +148,141 @@ export default function CheckoutModal({
 
     return inside;
   };
+
+  useEffect(() => {
+    showDeliveryAreaRef.current = showDeliveryArea;
+  }, [showDeliveryArea]);
+
+  const handleCheckoutClose = () => {
+    if (closingRef.current) return;
+
+    closingRef.current = true;
+
+    if (window.history.state?.checkoutModal) {
+      window.history.back();
+    } else {
+      closingRef.current = false;
+      onClose();
+    }
+  };
+
+  const initializeDeliveryMap = () => {
+    if (!mapRef.current) return;
+
+    const google = (window as any).google;
+    if (!google?.maps) return;
+
+    const center = {
+      lat: SHOP_LOCATION.latitude,
+      lng: SHOP_LOCATION.longitude,
+    };
+
+    googleMapRef.current = new google.maps.Map(mapRef.current, {
+      center,
+      zoom: 14,
+      mapTypeId: "roadmap",
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      zoomControl: true,
+      gestureHandling: "greedy",
+      clickableIcons: true,
+    });
+
+    polygonRef.current = new google.maps.Polygon({
+      paths: DELIVERY_AREA.map((point) => ({
+        lat: point.latitude,
+        lng: point.longitude,
+      })),
+      strokeColor: "#ffb800",
+      strokeOpacity: 1,
+      strokeWeight: 3,
+      fillColor: "#ffb800",
+      fillOpacity: 0.22,
+      map: googleMapRef.current,
+    });
+
+    shopMarkerRef.current = new google.maps.Marker({
+      position: center,
+      map: googleMapRef.current,
+      title: "Chicken Corner - ركن الدجاج",
+      icon: {
+        url: "/logo.png",
+        scaledSize: new google.maps.Size(48, 48),
+      },
+    });
+
+    if (customerCoords) {
+      updateCustomerMarker(customerCoords);
+    }
+  };
+
+  const updateCustomerMarker = (coords: { latitude: number; longitude: number }) => {
+    const google = (window as any).google;
+    if (!google?.maps || !googleMapRef.current) return;
+
+    const position = { lat: coords.latitude, lng: coords.longitude };
+
+    if (customerMarkerRef.current) {
+      customerMarkerRef.current.setPosition(position);
+    } else {
+      customerMarkerRef.current = new google.maps.Marker({
+        position,
+        map: googleMapRef.current,
+        title: "You are here",
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 9,
+          fillColor: "#2563eb",
+          fillOpacity: 1,
+          strokeColor: "#ffffff",
+          strokeWeight: 3,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!showDeliveryArea) return;
+
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    if (!apiKey) return;
+
+    const existingScript = document.querySelector(
+      'script[data-google-maps="chicken-corner"]'
+    ) as HTMLScriptElement | null;
+
+    if (existingScript) {
+      if ((window as any).google?.maps) {
+        initializeDeliveryMap();
+      } else {
+        existingScript.addEventListener("load", initializeDeliveryMap);
+      }
+
+      return () => {
+        existingScript.removeEventListener("load", initializeDeliveryMap);
+      };
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+    script.async = true;
+    script.defer = true;
+    script.dataset.googleMaps = "chicken-corner";
+    script.addEventListener("load", initializeDeliveryMap);
+    document.head.appendChild(script);
+
+    return () => {
+      script.removeEventListener("load", initializeDeliveryMap);
+    };
+  }, [showDeliveryArea]);
+
+  useEffect(() => {
+    if (showDeliveryArea && customerCoords) {
+      updateCustomerMarker(customerCoords);
+    }
+  }, [customerCoords, showDeliveryArea]);
 
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -243,16 +402,6 @@ export default function CheckoutModal({
       return;
     }
 
-    // Building / Flat
-    if (!flat.trim()) {
-      alert(
-        isAr
-          ? "يرجى إدخال رقم المبنى / الشقة."
-          : "Please enter building/flat number."
-      );
-      return;
-    }
-
     // Check delivery area
     const insideDeliveryArea = isInsideDeliveryArea(
       customerCoords.latitude,
@@ -292,6 +441,34 @@ export default function CheckoutModal({
       notes,
     });
   };
+
+  useEffect(() => {
+    if (!open) return;
+
+    closingRef.current = false;
+    window.history.pushState({ checkoutModal: true }, "");
+
+    const handlePopState = () => {
+      if (closingRef.current) {
+        closingRef.current = false;
+        onClose();
+        return;
+      }
+
+      if (showDeliveryAreaRef.current) {
+        setShowDeliveryArea(false);
+        return;
+      }
+
+      onClose();
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -365,7 +542,7 @@ export default function CheckoutModal({
               </h2>
 
               <button
-                onClick={onClose}
+                onClick={handleCheckoutClose}
                 className="rounded-full bg-[#1b1b1b] p-2 text-white hover:bg-[#ffb800]"
               >
                 <X size={20} />
@@ -464,6 +641,99 @@ export default function CheckoutModal({
                   />
                 </div>
               )}
+
+              {/* Our Delivery Area */}
+              <div className="overflow-hidden rounded-2xl border border-[#3b2b0d] bg-[#151515]">
+                <button
+                  type="button"
+                  onClick={() => setShowDeliveryArea((value) => !value)}
+                  className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition hover:bg-[#1c1c1c]"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ffb800]/10 text-[#ffb800]">
+                      <MapPin size={20} />
+                    </span>
+                    <span>
+                      <span className="block font-semibold text-white">
+                        {isAr ? "منطقة التوصيل" : "Our Delivery Area"}
+                      </span>
+                      <span className="block text-xs text-neutral-400">
+                        {isAr
+                          ? "اضغط لعرض منطقة التوصيل"
+                          : "Tap to view our delivery area"}
+                      </span>
+                    </span>
+                  </span>
+
+                  {showDeliveryArea ? (
+                    <ChevronUp size={20} className="shrink-0 text-[#ffb800]" />
+                  ) : (
+                    <ChevronDown size={20} className="shrink-0 text-[#ffb800]" />
+                  )}
+                </button>
+
+                {showDeliveryArea && (
+                  <div className="border-t border-[#2d2208] p-3">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2">
+                        <Image
+                          src="/logo.png"
+                          alt="Chicken Corner"
+                          width={34}
+                          height={34}
+                          className="rounded-lg object-contain"
+                        />
+                        <div>
+                          <p className="text-sm font-bold text-white">
+                            {isAr ? "منطقة التوصيل" : "Our Delivery Area"}
+                          </p>
+                          <p className="text-xs text-neutral-400">
+                            Al-Safa, Jeddah
+                          </p>
+                        </div>
+                      </div>
+                      <span className="rounded-full bg-[#ffb800]/10 px-3 py-1 text-xs font-semibold text-[#ffb800]">
+                        13 points
+                      </span>
+                    </div>
+
+                    <div className="relative overflow-hidden rounded-2xl border border-[#3b2b0d] bg-[#0d0d0d]">
+                      <div ref={mapRef} className="h-[280px] w-full sm:h-[340px]" />
+
+                      {!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-[#111111]/95 p-5 text-center">
+                          <div className="max-w-sm">
+                            <MapPin className="mx-auto mb-3 text-[#ffb800]" size={34} />
+                            <p className="font-semibold text-white">
+                              {isAr ? "خريطة منطقة التوصيل" : "Delivery Area Map"}
+                            </p>
+                            <p className="mt-1 text-sm text-neutral-400">
+                              {isAr
+                                ? "أضف مفتاح Google Maps لعرض الخريطة الحقيقية."
+                                : "Add your Google Maps API key to display the real map."}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-400">
+                      <span className="flex items-center gap-2">
+                        <span className="h-3 w-3 rounded-full bg-[#ffb800]" />
+                        {isAr ? "منطقة التوصيل" : "Delivery Area"}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <span className="h-3 w-3 rounded-full bg-red-500" />
+                        {isAr ? "المطعم" : "Chicken Corner"}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <span className="h-3 w-3 rounded-full bg-blue-500" />
+                        {isAr ? "موقعك" : "You are here"}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Building / Flat */}
               <div>
