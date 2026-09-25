@@ -100,6 +100,7 @@ export default function OfferCard({
       dir={isRTL ? "rtl" : "ltr"}
       className="
         group
+        relative
         h-full
         overflow-hidden
         rounded-3xl

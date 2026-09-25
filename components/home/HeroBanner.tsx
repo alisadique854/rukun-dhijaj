@@ -348,7 +348,7 @@ export default function HeroBanner() {
 
         {/* =================================================
             HEADING
-            Mobile position stays fixed in LTR direction
+            Position stays fixed when language changes
             ================================================= */}
         <h1
           dir="ltr"
