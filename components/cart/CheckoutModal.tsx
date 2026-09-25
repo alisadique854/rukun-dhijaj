@@ -503,10 +503,23 @@ export default function CheckoutModal({
 
               {/* Location Status */}
               {locationSelected ? (
-                <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-3 text-center text-green-400">
-                  {isAr
-                    ? "📍 تم اختيار الموقع بنجاح"
-                    : "📍 Location Selected Successfully"}
+                <div className="space-y-2">
+                  <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-3 text-center text-green-400">
+                    {isAr
+                      ? "📍 تم اختيار الموقع بنجاح"
+                      : "📍 Location Selected Successfully"}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowLocationGuide(true)}
+                    disabled={loadingLocation}
+                    className="w-full rounded-xl border border-[#ffb800] bg-[#181818] px-4 py-3 font-semibold text-[#ffb800] transition-colors hover:bg-[#ffb800]/10 disabled:opacity-50"
+                  >
+                    {isAr
+                      ? "📍 تغيير موقع التوصيل"
+                      : "📍 Change Delivery Location"}
+                  </button>
                 </div>
               ) : (
                 <div>
