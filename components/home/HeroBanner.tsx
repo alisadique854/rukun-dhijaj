@@ -92,44 +92,54 @@ export default function HeroBanner() {
     >
       {/* =====================================================
           MOBILE HERO BACKGROUND
+          Image: 1024 x 1536 = 2:3
           ===================================================== */}
-      <div className="absolute inset-0 z-0 sm:hidden">
+      <div
+        className="
+          absolute
+          inset-x-0
+          top-0
+          z-0
+          aspect-[2/3]
+          sm:hidden
+        "
+      >
         <Image
           src="/images/hero-mobile.webp"
           alt="Chicken Corner Restaurant"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_55%]"
+          className="object-contain object-top"
         />
 
         {/* Overall dark overlay */}
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-black/20" />
 
-        {/* Bottom content fade */}
-        <div
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-            h-[65%]
-            bg-gradient-to-t
-            from-[#0d0d0d]
-            via-[#0d0d0d]/55
-            to-transparent
-          "
-        />
-
-        {/* Top dark area */}
+        {/* Top gradient */}
         <div
           className="
             absolute
             inset-x-0
             top-0
-            h-32
+            h-24
             bg-gradient-to-b
             from-[#0d0d0d]
-            via-[#0d0d0d]/85
+            via-[#0d0d0d]/60
+            to-transparent
+          "
+        />
+
+        {/* Bottom fade */}
+        <div
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            h-[50%]
+            bg-gradient-to-t
+            from-[#0d0d0d]
+            via-[#0d0d0d]/55
             to-transparent
           "
         />
@@ -137,16 +147,19 @@ export default function HeroBanner() {
 
       {/* =====================================================
           MOBILE HEADER
+          OVERLAY - ZERO EXTRA SPACE
           ===================================================== */}
       <div
         className="
-          relative
+          absolute
+          inset-x-0
+          top-0
           z-30
           flex
-          h-[96px]
           items-center
           justify-between
           px-4
+          pt-4
           sm:hidden
         "
       >
@@ -156,7 +169,7 @@ export default function HeroBanner() {
           <div
             dir="rtl"
             className="
-              text-[19px]
+              text-[18px]
               font-black
               leading-none
               tracking-tight
@@ -171,7 +184,7 @@ export default function HeroBanner() {
             className="
               mt-1
               whitespace-nowrap
-              text-[16px]
+              text-[14px]
               font-bold
               leading-none
               tracking-[0.08em]
@@ -234,7 +247,6 @@ export default function HeroBanner() {
 
       {/* =====================================================
           DESKTOP BACKGROUND
-          Existing desktop layout preserved
           ===================================================== */}
       <div className="absolute inset-0 hidden sm:block">
         <Image
@@ -295,7 +307,7 @@ export default function HeroBanner() {
           justify-end
           px-5
           pb-2
-          pt-20
+          pt-8
 
           sm:min-h-[560px]
           sm:justify-center
@@ -347,7 +359,7 @@ export default function HeroBanner() {
 
         {/* =================================================
             HEADING
-            Fixed physical position when language changes
+            Fixed physical position
             ================================================= */}
         <h1
           dir="ltr"
