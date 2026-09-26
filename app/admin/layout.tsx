@@ -1,45 +1,27 @@
-"use client";
+import type { Metadata } from "next";
+import AdminAuth from "./AdminAuth";
 
-import { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+export const metadata: Metadata = {
+  title: {
+    default: "Chicken Corner Admin",
+    template: "%s | Chicken Corner Admin",
+  },
+  description: "Chicken Corner restaurant administration panel.",
+  applicationName: "Chicken Corner Admin",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-   
-    if (pathname === "/admin/login") {
-      setLoading(false);
-      return;
-    }
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.replace("/admin/login");
-      } else {
-        setLoading(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [router, pathname]);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[#090909] text-white">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#ffb800] border-t-transparent mx-auto"></div>
-      </div>
-    );
-  }
-
-
-  return <div dir="ltr">{children}</div>;
+  return (
+    <div dir="ltr">
+      <AdminAuth>{children}</AdminAuth>
+    </div>
+  );
 }
