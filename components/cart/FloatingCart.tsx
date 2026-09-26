@@ -304,7 +304,7 @@ Total: SAR ${(item.price * item.quantity).toFixed(
       // If a Markdown-style link somehow reaches the customer
       // details, convert it back to a plain URL for WhatsApp.
       const cleanLocation = customer.location
-        .replace(/^\\[([^\\]]+)\\]\\(([^)]+)\\)$/, "$2")
+        .replace(/^\[([^\]]+)\]\(([^)]+)\)$/, "$2")
         .trim();
 
       // -----------------------------------------------------
