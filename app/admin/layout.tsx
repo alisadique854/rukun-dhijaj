@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   },
   description: "Chicken Corner restaurant administration panel.",
   applicationName: "Chicken Corner Admin",
+  manifest: "/admin/manifest.webmanifest",
+
   robots: {
     index: false,
     follow: false,
